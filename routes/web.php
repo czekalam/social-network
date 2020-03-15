@@ -10,6 +10,10 @@ Route::group(['middleware'=>['web']], function() {
         'uses' => 'UserController@getUsers',
         'as' => 'users'
     ]);
+    Route::get('/friends',[
+        'uses' => 'FriendController@getFriends',
+        'as' => 'friends'
+    ]);
     Route::post('/friendadd',[
         'uses' => 'FriendController@postAddFriend',
         'as' => 'friend.add'

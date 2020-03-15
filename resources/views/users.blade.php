@@ -13,10 +13,12 @@
     </form>
     @foreach($users as $user)
         Name:{{$user->first_name}}
-        <form action="{{ route('friend.add') }}" method="POST">
-            @csrf
-            <input type="hidden" value={{$user->id}} name="friend_id"/>
-            <input type="submit" value="Add friend"><br/>
-        </form>
+        @if(!$user->already_friended)
+            <form action="{{ route('friend.add') }}" method="POST">
+                @csrf
+                <input type="hidden" value={{$user->id}} name="friend_id"/>
+                <input type="submit" value="Add friend"><br/>
+            </form>
+        @endif
     @endforeach
 @endsection

@@ -10,7 +10,7 @@
                     <a class="nav-link" href="{{route('dashboard')}}">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Friends</a>
+                    <a class="nav-link" href="{{route('friends')}}">Friends</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href={{route('users')}}>Users</a>

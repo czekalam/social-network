@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Friend;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,12 @@ use Illuminate\Support\Facades\Storage;
 class UserController extends Controller {
     public function getUsers() {
         $users = User::all();
+        foreach($users as $user) {
+            $user->already_friended = false;
+            if(Friend::where('user1', Auth::user()->id)->where('user2',$user->id)->first()->accepted) {
+                $user->already_friended = true;
+            }
+        }
         return view('users',['users'=>$users]);
     }
     public function postSignUp(Request $request) {
