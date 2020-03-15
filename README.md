@@ -1,1 +1,1 @@
-social network appssssss
+social network app
