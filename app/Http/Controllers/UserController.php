@@ -15,8 +15,10 @@ class UserController extends Controller {
         $users = User::all();
         foreach($users as $user) {
             $user->already_friended = false;
-            if(Friend::where('user1', Auth::user()->id)->where('user2',$user->id)->first()->accepted) {
-                $user->already_friended = true;
+            if(Friend::where('user1', Auth::user()->id)->where('user2',$user->id)->first()) {
+                if(Friend::where('user1', Auth::user()->id)->where('user2',$user->id)->first()->accepted) {
+                    $user->already_friended = true;
+                }
             }
         }
         return view('users',['users'=>$users]);
@@ -65,6 +67,7 @@ class UserController extends Controller {
         $user = Auth::user();
         $old_name = $user->first_name;
         $user->first_name = $request['first_name'];
+        $user->about_me = $request['about_me'];
         $user->update();
         $file = $request->file('image');
         $filename = $request['first_name'] . '-' . $user->id . '.jpg';

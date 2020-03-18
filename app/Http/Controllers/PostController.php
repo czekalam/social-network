@@ -4,12 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Like;
+use App\Friend;
+use App\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller {
     public function getDashboard() {
-        $posts = Post::orderBy('created_at', 'desc')->get();
+        $posts=[]; 
+        $users=[];
+        $friends =Friend::where('user2',Auth::user()->id)->where('user1', '!=' , Auth::user()->id)->get();
+        $friends2 =Friend::where('user1',Auth::user()->id)->where('user2', '!=' , Auth::user()->id)->get();
+        $friendList=[];
+        foreach($friends as $friend) {
+            if(User::where('id',$friend->user1)->first()) {
+                array_push($posts,User::where('id',$friend->user1)->first()->posts()->get());
+            }
+        }
+        foreach($friends2 as $friend) {
+            if(User::where('id',$friend->user2)->first()) {
+                array_push($posts,User::where('id',$friend->user2)->first()->posts()->get());
+            }
+        }
         return view('dashboard', ["posts" => $posts]);
     }
     public function postCreatePost(Request $request) {

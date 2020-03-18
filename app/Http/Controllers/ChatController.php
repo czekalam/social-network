@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class ChatController extends Controller {
     public function getIndex(Request $request) {
-        $messages = Message::all();
-        return view('chat.index', ["messages" => $messages]);
+        $messages=Message::where('user1_id',$request->friend_id)->where('user2_id',Auth::user()->id)->orwhere('user2_id',$request->friend_id)->where('user1_id',Auth::user()->id)->orderBy('created_at', 'asc')->get();
+        return view('chat.index', ["receiver"=>$request->friend_id,"messages" => $messages]);
     }
     public function postCreateMessage(Request $request) {
         $this->validate($request, [
@@ -18,10 +18,9 @@ class ChatController extends Controller {
         ]);
         $message = new Message();
         $message->user1_id=Auth::user()->id;
-        $message->user2_id=1;
+        $message->user2_id=$request->receiver;
         $message->content = $request['content'];
         $message->save();
-
         return redirect()->back();
     }
 }

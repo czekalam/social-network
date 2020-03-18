@@ -9,16 +9,17 @@ use Illuminate\Support\Facades\Auth;
 
 class FriendController extends Controller {
     public function getFriends(Request $request) {
-        $friends = Friend::where('user2',Auth::user()->id)->get();
+        $users=[];
+        $friends = Friend::where('user2',Auth::user()->id)->orWhere('user1',Auth::user()->id)->get();
         foreach($friends as $friend) {
-            $users = User::where('id',$friend->user1)->get();
+            if($friend->user1==Auth::user()->id){
+                array_push($users, User::where('id',$friend->user2)->get());
+            }
+            else {
+                array_push($users, User::where('id',$friend->user1)->get());
+            }
         }
-        $friends = Friend::where('user1',Auth::user()->id)->get();
-        foreach($friends as $friend) {
-            $users = User::where('id',$friend->user2)->get(); 
-        }
-        $friends=$users;
-        return view('friends', ["friends" => $friends]);
+        return view('friends', ["friends" => $users]);
     }
     public function postAddFriend(Request $request) {
         $friend = new Friend();

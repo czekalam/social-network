@@ -12,6 +12,7 @@
                 <div class="form-group">
                     <label for="first_name">First Name</label>
                     <input type="text" name="first_name" class="form-control" value="{{ $user->first_name }}" id="first_name">
+                    <textarea name="about_me">About me</textarea>
                 </div>
                 <div class="form-group">
                     <label for="image">Image (only .jpg)</label>
