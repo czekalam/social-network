@@ -20,7 +20,6 @@
             width: 100%;
         }
         .container {
-            padding-top:40px;
             height: 100%;
             display: flex;
             justify-content: center;
@@ -42,6 +41,9 @@
     </style>
     @include('includes.message-block')
     <div class="row mc-home-box-wrapper">
+        {{-- <div>
+            You have to be loged in to use our page
+        </div> --}}
         <div class="col-md-6 mc-home-box">
             <h3>Sign Up</h3>
             <form action="{{ route('signup') }}" method="POST">

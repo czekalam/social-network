@@ -1,10 +1,17 @@
 @extends('layouts.master')
 @section('content')
-
+  <style>
+    .mc-box {
+        background: #fff;
+        border-radius: 10px;
+        padding: 50px;
+        margin-bottom:20px;
+    }
+  </style>
     @include('includes.info-box')
     @include('includes.message-block')
     <section class="row new-post">
-        <div class="col-md-6 offset-md-3">
+        <div class="col-md-6 offset-md-3 mc-box">
             <header><h3>Say something to your friends...</h3></header>
             <form action="{{ route('post.create')}}" method="post">
                 @csrf
@@ -16,7 +23,7 @@
         </div>
     </section>
     <section class="row posts">
-        <div class="col-md-6 offset-md-3">
+        <div class="col-md-6 offset-md-3 mc-box">
             <header><h3>What your friends say...</h3></header>
             @foreach($posts as $posts2)
               @foreach($posts2 as $post)

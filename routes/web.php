@@ -8,23 +8,28 @@ Route::group(['middleware'=>['web']], function() {
     })->name('home');
     Route::get('/users',[
         'uses' => 'UserController@getUsers',
-        'as' => 'users'
+        'as' => 'users',
+        'middleware' => 'auth'
     ]);
     Route::get('/friends',[
         'uses' => 'FriendController@getFriends',
-        'as' => 'friends'
+        'as' => 'friends',
+        'middleware' => 'auth'
     ]);
     Route::post('/friendadd',[
         'uses' => 'FriendController@postAddFriend',
-        'as' => 'friend.add'
+        'as' => 'friend.add',
+        'middleware' => 'auth'
     ]);
     Route::post('/friendconfirm',[
         'uses' => 'FriendController@postConfirmFriend',
-        'as' => 'friend.confirm'
+        'as' => 'friend.confirm',
+        'middleware' => 'auth'
     ]);
     Route::post('/frienddelete',[
         'uses' => 'FriendController@postDeleteFriend',
-        'as' => 'friend.delete'
+        'as' => 'friend.delete',
+        'middleware' => 'auth'
     ]);
     Route::post('/signup',[
         'uses' => 'UserController@postSignUp',
@@ -36,20 +41,24 @@ Route::group(['middleware'=>['web']], function() {
     ]);
     Route::get('/logout',[
         'uses' => 'UserController@getLogout',
-        'as' => 'logout'
+        'as' => 'logout',
+        'middleware' => 'auth'
     ]);
     Route::get('/account',[
         'uses' => 'UserController@getAccount',
-        'as' => 'account'
+        'as' => 'account',
+        'middleware' => 'auth'
     ]);
     Route::post('/updateaccount',[
         'uses' => 'UserController@postSaveAccount',
-        'as' => 'account.save'
+        'as' => 'account.save',
+        'middleware' => 'auth'
     ]);
     
     Route::get('/userimage/{filename}', [
         'uses' => 'UserController@getUserImage',
-        'as' => 'account.image'
+        'as' => 'account.image',
+        'middleware' => 'auth'
     ]);
     Route::get('/dashboard',[
         'uses' => 'PostController@getDashboard',
@@ -73,7 +82,8 @@ Route::group(['middleware'=>['web']], function() {
     ]);
     Route::post('/like', [
         'uses' => 'PostController@postLikePost',
-        'as' => 'like'
+        'as' => 'like',
+        'middleware' => 'auth'
     ]);
     
     Route::get('/chat', [
