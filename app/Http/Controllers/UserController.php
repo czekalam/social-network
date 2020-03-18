@@ -14,11 +14,9 @@ class UserController extends Controller {
     public function getUsers() {
         $users = User::all();
         foreach($users as $user) {
-            $user->already_friended = false;
+            $user->already_friended = 0;
             if(Friend::where('user1', Auth::user()->id)->where('user2',$user->id)->first()) {
-                if(Friend::where('user1', Auth::user()->id)->where('user2',$user->id)->first()->accepted) {
-                    $user->already_friended = true;
-                }
+                $user->already_friended = 1;
             }
         }
         return view('users',['users'=>$users]);

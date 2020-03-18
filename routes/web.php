@@ -18,6 +18,14 @@ Route::group(['middleware'=>['web']], function() {
         'uses' => 'FriendController@postAddFriend',
         'as' => 'friend.add'
     ]);
+    Route::post('/friendconfirm',[
+        'uses' => 'FriendController@postConfirmFriend',
+        'as' => 'friend.confirm'
+    ]);
+    Route::post('/frienddelete',[
+        'uses' => 'FriendController@postDeleteFriend',
+        'as' => 'friend.delete'
+    ]);
     Route::post('/signup',[
         'uses' => 'UserController@postSignUp',
         'as' => 'signup'

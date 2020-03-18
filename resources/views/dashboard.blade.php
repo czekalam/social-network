@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('content')
+
     @include('includes.info-box')
     @include('includes.message-block')
     <section class="row new-post">
