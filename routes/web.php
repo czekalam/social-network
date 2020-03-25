@@ -6,6 +6,19 @@ Route::group(['middleware'=>['web']], function() {
     Route::get('/', function () {
         return view('welcome');
     })->name('home');
+
+
+
+    Route::get('/scissors', function () {
+        return view('games.scissors');
+    })->name('scissors');
+
+    Route::get('/bird', function () {
+        return view('games.bird');
+    })->name('bird');
+
+
+
     Route::get('/users',[
         'uses' => 'UserController@getUsers',
         'as' => 'users',

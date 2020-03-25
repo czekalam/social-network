@@ -24,6 +24,12 @@
                     <a class="btn" href={{route('account')}}>Account</a>
                 </li>
                 <li class="nav-item">
+                    <a class="btn" href={{route('scissors')}}>Scissors game</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn" href={{route('bird')}}>Bird game</a>
+                </li>
+                <li class="nav-item">
                     <a class="btn" href={{route('logout')}}>Logout</a>
                 </li>
             </ul>
