@@ -43,10 +43,22 @@
                 <input type="hidden" name="receiver" value="{{$receiver}}"/>
                 <textarea class="form-control" name="content" rows="5"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button id="form-submit" type="submit" class="btn btn-primary">Save changes</button>
         </form>
     </div>
     <script>
+        $("#form-submit").click(function(event) {
+            event.preventDefault();
+            $.ajax({
+                url : '/chat/data',
+                type : 'GET',
+                data:'_token = <?php echo csrf_token() ?>',
+                dataType : 'json',
+                success : function(json) {
+                    console.log(json);
+                }
+            });
+        });
         var chatBox = document.getElementById("chat-box");
         chatBox.scrollTop = chatBox.scrollHeight;
     </script>

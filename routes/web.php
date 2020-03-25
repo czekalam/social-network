@@ -104,6 +104,11 @@ Route::group(['middleware'=>['web']], function() {
         'as' => 'chat.index',
         'middleware' => 'auth'
     ]);
+    // Route::get('/chat/data', function() {
+    //     if(Request::ajax()) {
+    //         return var_dump(Response::json(Request::all()));
+    //     }
+    // });
     Route::post('/chat', [
         'uses' => 'ChatController@postCreateMessage',
         'as' => 'chat.add',
