@@ -31,35 +31,94 @@
                 }
             </style>
         <div id="chat-box" class="chat-box">
-            @foreach ($messages as $message)
+            {{-- @foreach ($messages as $message)
                 <div class="chat-box__row chat-box__row--{{($message->user1_id == Auth::user()->id)?'my':'sb'}}">
                     <div class="chat-box__message">{{ $message->content }}</div>
                 </div>
-            @endforeach
+            @endforeach --}}
         </div>
-        <form action="{{ route('chat.add')}}" method="post">
+        <form id="message-form" action="#" method="post">
             @csrf
             <div class="form-group">
                 <input type="hidden" name="receiver" value="{{$receiver}}"/>
-                <textarea class="form-control" name="content" rows="5"></textarea>
+                <textarea id="content" class="form-control" name="content" rows="5"></textarea>
             </div>
-            <button id="form-submit" type="submit" class="btn btn-primary">Save changes</button>
+            <div id="form-submit" type="submit" class="btn btn-primary">Save changes</div>
         </form>
     </div>
     <script>
-        $("#form-submit").click(function(event) {
-            event.preventDefault();
-            $.ajax({
-                url : '/chat/data',
-                type : 'GET',
-                data:'_token = <?php echo csrf_token() ?>',
-                dataType : 'json',
-                success : function(json) {
-                    console.log(json);
+        var chatBox = document.getElementById("chat-box");
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).ready(function() {
+            var messages_count=0;
+            $("#content").keypress(function(e) {
+                if(e.which == 10 || e.which == 13) {
+                    e.preventDefault();
+                    postMessage();
                 }
             });
+            setInterval(function(){
+                getMessages();
+            }, 500);
+            $('#form-submit').click(function(event) {
+                postMessage();
+            });
+            function getMessages() {
+                $.ajax({
+                    method: "GET",
+                    url: "chat/data",
+                    data: {"receiver": {{$receiver}}},
+                    success: function(data) {
+                        if(data.length>messages_count){
+                            $('#chat-box').empty();
+                            $.each( data, function( index, value ){
+                                var $item = $('<div>').addClass("chat-box__row").append(
+                                    $('<div>').addClass("chat-box__message").append(value.content)
+                                )
+                                if(value.user1_id=={{Auth::user()->id}}) {
+                                    $item.addClass("chat-box__row--my");
+                                }
+                                else {
+                                    $item.addClass("chat-box__row--sb");
+                                }
+                                $('#chat-box').append($item);
+                                chatBox.scrollTop = chatBox.scrollHeight;
+                            })
+                            messages_count=data.length;
+                        }
+                    }
+                });
+            }
+            function postMessage() {
+                var data = $("#content").val();
+                $.ajax({
+                    method: "POST",
+                    url: "chat",
+                    data: {"content": data, "receiver": {{$receiver}}},
+                    success: function(data) {
+                        $('#chat-box').empty();
+                        $('#content').val('');
+                        $.each( data, function( index, value ){
+                            var $item = $('<div>').addClass("chat-box__row").append(
+                                $('<div>').addClass("chat-box__message").append(value.content)
+                            )
+                            if(value.user1_id=={{Auth::user()->id}}) {
+                                $item.addClass("chat-box__row--my");
+                            }
+                            else {
+                                $item.addClass("chat-box__row--sb");
+                            }
+                            $('#chat-box').append($item);
+                            chatBox.scrollTop = chatBox.scrollHeight;
+                        })
+                    }
+                });
+            }
         });
-        var chatBox = document.getElementById("chat-box");
         chatBox.scrollTop = chatBox.scrollHeight;
     </script>
 @endsection

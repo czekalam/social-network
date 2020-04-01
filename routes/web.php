@@ -98,17 +98,16 @@ Route::group(['middleware'=>['web']], function() {
         'as' => 'like',
         'middleware' => 'auth'
     ]);
-    
     Route::get('/chat', [
         'uses' => 'ChatController@getIndex',
         'as' => 'chat.index',
         'middleware' => 'auth'
     ]);
-    // Route::get('/chat/data', function() {
-    //     if(Request::ajax()) {
-    //         return var_dump(Response::json(Request::all()));
-    //     }
-    // });
+    Route::get('/chat/data', [
+        'uses' => 'ChatController@getMessages',
+        'as' => 'chat.messages',
+        'middleware' => 'auth'
+    ]);
     Route::post('/chat', [
         'uses' => 'ChatController@postCreateMessage',
         'as' => 'chat.add',
