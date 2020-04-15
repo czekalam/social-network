@@ -1,61 +1,34 @@
-<style>
-    .container {
-        padding-top:40px;
-    }
-    .mc-weather {
-        padding: 20px;
-        width: 100%;
-    }
-    .mc-weather__wrapper {
-        display: flex;
-        justify-content: center;
-    }
-    .mc-weather__wrapper,.mc-weather__wrapper ul {
-        list-style: none;
-    }
-    .mc-position-top {
-        background: #fff;
-        width:100%;
-    }
-    body header {
-        position: relative;
-    }
-</style>
 <div class="mc-position-top">
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
+        <div class="uk-navbar-container" uk-navbar>
+            <div class="uk-navbar-center">
+                <ul class="uk-navbar-nav">
+                    <li>
                         <a class="nav-link" href="{{route('dashboard')}}">Dashboard</a>
                     </li>
-                    <li class="nav-item">
+                    <li>
                         <a class="nav-link" href="{{route('friends')}}">Friends</a>
                     </li>
-                    <li class="nav-item">
+                    <li>
                         <a class="nav-link" href={{route('users')}}>Users</a>
                     </li>
-                    <li class="nav-item">
+                    <li>
                         <a class="btn" href={{route('account')}}>Account</a>
                     </li>
-                    <li class="nav-item">
+                    <li>
                         <a class="btn" href={{route('scissors')}}>Scissors game</a>
                     </li>
-                    <li class="nav-item">
+                    <li>
                         <a class="btn" href={{route('bird')}}>Bird game</a>
                     </li>
-                    <li class="nav-item">
+                    <li>
                         <a class="btn" href={{route('logout')}}>Logout</a>
                     </li>
                 </ul>
             </div>
-        </nav>
+        </div>
     </header>
-    <div id="mc-weather" class="mc-weather">
+    <div id="mc-weather" class="uk-margin-top mc-weather">
         <ul class="mc-weather__wrapper"></ul>
         <script>
             function day(day) {

@@ -1,49 +1,14 @@
 @extends('layouts.master')
 
 @section('title')
-    Hi!
+    Welcome
 @endsection
 
+@section('page-class') welcome @endsection
+
 @section('content')
-    <style>
-        html {
-            height: 100%;
-        }
-        body {
-            height: 100%;
-            position: relative;
-            background:
-            linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url("{{ URL::to('src/images/home-bg.jpg')}}");
-        }
-        header {
-            position: absolute;
-            width: 100%;
-        }
-        .container {
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .mc-home-box-wrapper {
-            width: 100%;
-        }
-        .mc-home-box.col-md-6 {
-            max-width: 48%;
-        }
-        .mc-home-box {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0px 0px 20px #000;
-            padding: 50px;
-            margin: 1%;
-        }
-    </style>
     @include('includes.message-block')
     <div class="row mc-home-box-wrapper">
-        {{-- <div>
-            You have to be loged in to use our page
-        </div> --}}
         <div class="col-md-6 mc-home-box">
             <h3>Sign Up</h3>
             <form action="{{ route('signup') }}" method="POST">

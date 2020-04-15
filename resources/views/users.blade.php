@@ -3,85 +3,40 @@
 @section('title')
     Users
 @endsection
-
+@section('page-class') users @endsection
 @section('content')
-    <style>
-        .mc-user-thumb {
-            width:50px;
-            height:50px;
-            margin-right: 20px;
-            border-radius: 50%;
-        }
-        .mc-user-box {
-            display:flex;
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
-        }
-        .mc-user-box:last-child {
-            border-bottom: none;
-        }
-        .mc-user-textbox {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .mc-user-textbox p{
-            margin: 0;
-        }
-        .mc-box {
-            background: #fff;
-            border-radius: 10px;
-            padding: 50px;
-            margin-bottom:20px;
-        }
-        .mc-user-search {
-            border:1px solid #ccc;
-            border-radius: 10px;
-            padding-left: 7px;
-            padding-right: 7px;
-            margin-bottom:40px;
-        }
-        .mc-user-search-text {
-            border:none;
-            outline: none;
-            width:76%;
-        }
-        .mc-user-search-btn {
-            border: none;
-            outline: none;
-            background: #fff;
-            border-left: 1px solid #ccc;
-            width:23%;
-        }
-    </style>
-    <div class="col-md-6 offset-md-3 mc-box">
-        <p>Search somebody you know</p>
-        <form id="mc-user-search" class="mc-user-search">
-            @csrf
+    <div class="mc-box">
+        <h3>Search somebody you know</h3>
+        <div class="mc-user-search">
             <input class="mc-user-search-text" type="text" name="friend_name"/>
-            <input class="mc-user-search-btn" type="button" value="Search friend"><br/>
-        </form>
-        @foreach($users as $user)
-            <div class="mc-user-box">
-                {{-- <img style="width:50px;height:50px;" src="{{ route('account.image', ['user_id' => $user->id]) }}" alt="" class="mc-user-thumb img-responsive"> --}}
-               <div class="mc-user-textbox">
-                    <p>Name:<a href="/account/{{$user->id}}">{{$user->first_name}}</a></p>
-                </div> 
-                @if(!$user->already_friended)
-                    <form action="{{ route('friend.add') }}" method="POST">
-                        @csrf
-                        <input type="hidden" value={{$user->id}} name="friend_id"/>
-                        <input type="submit" value="Add friend"><br/>
-                    </form>
-                @endif
-            </div>
-        @endforeach
+        </div>
+        <div uk-grid class="uk-child-width-1-4">
+            @foreach($users as $user)
+                <div u-grid class="uk-grid-collapse uk-flex-column uk-card uk-card-default uk-card-body uk-margin">
+                    <div class="uk-flex uk-flex-center uk-flex-middle uk-margin-small-bottom">
+                        <img src="{{ route('account.image', ['user_id' => $user->id]) }}" class="mc-user-thumb">
+                    </div>
+                    <div class="uk-flex uk-flex-center uk-flex-middle uk-margin-bottom">
+                        <a class="mc-search-user" href="/account/{{$user->id}}">{{$user->first_name}}</a>
+                    </div> 
+                    @if(!$user->already_friended)
+                        <div class="uk-flex uk-flex-around uk-flex-middle">
+                            <form action="{{ route('friend.add') }}" method="POST">
+                                @csrf
+                                <input type="hidden" value={{$user->id}} name="friend_id"/>
+                                <button class="uk-button" type="submit"><i class="fas fa-user-friends"></i></button>
+                            </form>
+                        </div>
+                    @endif
+                </div>
+            @endforeach
+        </div>
     </div>
-    <script>
-        $(".mc-user-search-btn").click(function(event) {
-            event.preventDefault();            
-            $('.mc-user-textbox p').each(function() {
-                if($(this).text()!==("Name:"+ $(".mc-user-search-text").val())) {
+    <script> 
+        $(".mc-user-search-text").keyup(function() {   
+            $('.mc-search-user').parent().parent().show();   
+            $('.mc-search-user').each(function() {
+                if(!($(this).text()).includes($(".mc-user-search-text").val())) {
                     $(this).parent().parent().hide();
                 }
                 else {

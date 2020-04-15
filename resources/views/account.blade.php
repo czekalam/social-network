@@ -4,77 +4,42 @@
     Account
 @endsection
 
-@section('content')
-    <style>
-        .mc-box {
-            background: #fff;
-            border-radius: 10px;
-            padding: 50px;
-            margin-bottom:20px;
-        }
-        .mc-account-input {
-            border:none;
-            border:1px solid #ccc;
-            border-radius: 10px;
-            outline: none;
-            padding-left: 7px;
-            padding-right: 7px;
-            width: 100%;
-            margin:5px 0;
-        }
-        .mc-account-file {
-            border:0;
-            width:100%;
-        }
-        .mc-margin {
-            margin: 10px;
-        }
-    </style>
-    <div class="col-md-6 offset-md-3 mc-box">
-        <section class="row new-post">
-            <div class="col-md-12">
-                <header><h3>Your Account</h3></header>
-                <form action="{{ route('account.save') }}" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="first_name">First Name</label>
-                        <input type="text" name="first_name" class="form-control mc-account-input" value="{{ $user->first_name }}" id="first_name">
-                        <textarea class="mc-account-input" name="about_me">About me</textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="image">Image (only .jpg)</label>
-                        <input class="mc-account-file" type="file" name="image" class="form-control" id="image">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save Account</button>
-                    <input type="hidden" value="{{ Session::token() }}" name="_token">
-                </form>
-            </div>
-        </section>
-        @if (Storage::disk('local')->has($user->id . '.jpg'))
-            <section class="row new-post">
-                <div class="col-md-6 col-md-offset-3">
-                    <img style="width:50px;height:50px;" src="{{ route('account.image', ['user_id' => $user->id]) }}" alt="" class="img-responsive">
-                </div>
-            </section>
-        @endif
-    </div>
-    <div>
-        <p>{{$user->first_name}}</p>
-        <p>{{$user->about_me}}</p>
-        @if (Storage::disk('local')->has($user->id . '.jpg'))
-            <section class="row new-post">
-                <div class="col-md-6 col-md-offset-3">
-                    <img style="width:50px;height:50px;" src="{{ route('account.image', ['user_id' => $user->id]) }}" alt="" class="img-responsive">
-                </div>
-            </section>
-        @endif
-        @if($user->posts)
-            @foreach($user->posts as $post)
-                <div class="mc-margin">
-                    <p>{{$post->body}}</p>
-                    <p>{{$post->created_at}}</p>
-                </div>
-            @endforeach
-        @endif
-    </div>
+@section('page-class') account @endsection
 
+@section('content')
+    <div class="mc-box">
+        <div class="">
+            <h3>Your Account</h3>
+            <form action="{{ route('account.save') }}" method="post" enctype="multipart/form-data">
+                <div class="">
+                    <label for="first_name">First Name</label>
+                    <input type="text" name="first_name" class="uk-input" value="{{ $user->first_name }}" id="first_name">
+                    <textarea class="uk-textarea" name="about_me">About me</textarea>
+                </div>
+                <div class="">
+                    <label for="image">Image</label>
+                    <input class="mc-account-file" type="file" name="image" class="" id="image">
+                </div>
+                <button type="submit" class="uk-button">Save Account</button>
+                <input type="hidden" value="{{ Session::token() }}" name="_token">
+            </form>
+        </div>
+        <div>
+            <h3>{{$user->first_name}}</h3>
+            <p>{{$user->about_me}}</p>
+            @if (Storage::disk('local')->has($user->id . '.jpg'))
+                <div class="">
+                    <img src="{{ route('account.image', ['user_id' => $user->id]) }}">
+                </div>
+            @endif
+            @if($user->posts)
+                @foreach($user->posts as $post)
+                    <div class="mc-margin">
+                        <p>{{$post->body}}</p>
+                        <p>{{$post->created_at}}</p>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+    </div>
 @endsection

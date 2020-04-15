@@ -1,0 +1,170 @@
+html {
+  height: 100%;
+}
+
+html body {
+  position: relative;
+  background: #eee;
+}
+
+html body header {
+  position: relative;
+  width: 100%;
+}
+
+html body .mc-margin {
+  margin: 10px;
+}
+
+html body .mc-user-thumb {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+html body .mc-user-box {
+  display: flex;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+html body .mc-user-box .mc-user-textbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+html body .mc-user-box .mc-user-textbox p {
+  margin: 0;
+}
+
+html body .mc-user-box .mc-user-thumb {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+html body .mc-user-box:last-child {
+  border-bottom: none;
+}
+
+html body .mc-box {
+  background: #fff;
+  border-radius: 10px;
+  padding: 50px;
+  margin-bottom: 20px;
+}
+
+html body .mc-box .mc-account-input {
+  border: none;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  padding-left: 7px;
+  padding-right: 7px;
+  width: 100%;
+  margin: 5px 0;
+}
+
+html body .mc-box .mc-account-file {
+  border: 0;
+  width: 100%;
+}
+
+html body .mc-box .mc-user-search {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding-left: 7px;
+  padding-right: 7px;
+  margin-bottom: 40px;
+}
+
+html body .mc-box .mc-user-search .mc-user-search-text {
+  border: none;
+  outline: none;
+  width: 76%;
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+html body .mc-box .mc-user-search .mc-user-search-btn {
+  height: 100%;
+  border: none;
+  outline: none;
+  background: #fff;
+  border-left: 1px solid #ccc;
+  width: 23%;
+  font-size: 20px;
+  padding: 10px;
+}
+
+html body.welcome .chat-box {
+  border: 1px solid #000;
+  height: 50vh;
+  overflow-y: scroll;
+}
+
+html body.welcome .chat-box .chat-box__row {
+  display: flex;
+}
+
+html body.welcome .chat-box .chat-box__row .chat-box__message {
+  border-radius: 5px;
+  background: #00f;
+  margin: 10px;
+  padding: 5px;
+  color: #fff;
+}
+
+html body.welcome .chat-box .chat-box__row.chat-box__row--my {
+  justify-content: flex-end;
+}
+
+html body.welcome .chat-box .chat-box__row.chat-box__row--my .chat-box__message {
+  background: #55f;
+}
+
+html body .mc-position-top {
+  background: #fff;
+  width: 100%;
+}
+
+html body .mc-position-top .mc-weather {
+  padding: 20px;
+  width: 100%;
+}
+
+html body .mc-position-top .mc-weather .mc-weather__wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+html body .mc-position-top .mc-weather .mc-weather__wrapper,
+html body .mc-position-top .mc-weather .mc-weather__wrapper ul {
+  list-style: none;
+}
+
+html body.welcome .container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 40px;
+}
+
+html body.welcome .container .mc-home-box-wrapper {
+  width: 100%;
+}
+
+html body.welcome .container .mc-home-box-wrapper .mc-home-box {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px #000;
+  padding: 50px;
+  margin: 1%;
+}
+
+html body.welcome .container .mc-home-box-wrapper .mc-home-box.col-md-6 {
+  max-width: 48%;
+}
+

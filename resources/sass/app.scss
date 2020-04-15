@@ -1,1 +1,145 @@
-//
+html {
+    height: 100%;
+    body {
+        position: relative;
+        background:#eee;
+        header {
+            position: relative;
+            width: 100%;
+        }
+        .mc-margin {
+            margin: 10px;
+        }
+        .mc-user-thumb {
+            width:100px;
+            height:100px;
+            border-radius: 50%;
+        }
+        .mc-user-box {
+            display:flex;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            .mc-user-textbox{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                p {
+                    margin:0;
+                }
+            }
+            .mc-user-thumb {
+                width:50px;
+                height:50px;
+                border-radius: 50%;
+            }
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+        .mc-box {
+            background: #fff;
+            border-radius: 10px;
+            padding: 50px;
+            margin-bottom:20px;
+            .mc-account-input {
+                border:none;
+                border:1px solid #ccc;
+                border-radius: 10px;
+                outline: none;
+                padding-left: 7px;
+                padding-right: 7px;
+                width: 100%;
+                margin:5px 0;
+            }
+            .mc-account-file {
+                border:0;
+                width:100%;
+            }
+            .mc-user-search {
+                border:1px solid #ccc;
+                border-radius: 10px;
+                padding-left: 7px;
+                padding-right: 7px;
+                margin-bottom:40px;
+                .mc-user-search-text {
+                    border: none;
+                    outline: none;
+                    width: 76%;
+                    font-size: 20px;
+                    margin: 10px 0;
+                }
+                .mc-user-search-btn {
+                    height: 100%;
+                    border: none;
+                    outline: none;
+                    background: #fff;
+                    border-left: 1px solid #ccc;
+                    width: 23%;
+                    font-size: 20px;
+                    padding: 10px;
+                }
+            }
+        }
+        &.welcome {
+            .chat-box {
+                border:1px solid #000;
+                height: 50vh;
+                overflow-y: scroll;
+                .chat-box__row {
+                    display: flex;
+                    .chat-box__message {
+                        border-radius:5px;
+                        background:#00f;
+                        margin: 10px;
+                        padding: 5px;
+                        color:#fff;
+                    }
+                    &.chat-box__row--my {
+                        justify-content: flex-end;
+                        .chat-box__message{
+                            background:#55f;
+                        }
+                    }
+                }
+            }
+        }
+        .mc-position-top {
+            background: #fff;
+            width:100%;
+            .mc-weather {
+                padding: 20px;
+                width: 100%;
+                .mc-weather__wrapper {
+                    display: flex;
+                    justify-content: center;
+                    &,ul {
+                        list-style: none;
+                    }
+                }
+            }
+        }
+        &.welcome {
+            // background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url("{{ URL::to('src/images/home-bg.jpg')}}");
+            .container {
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding-top:40px;
+                .mc-home-box-wrapper {
+                    width: 100%;
+                    .mc-home-box {
+                        background: #fff;
+                        border-radius: 10px;
+                        box-shadow: 0px 0px 20px #000;
+                        padding: 50px;
+                        margin: 1%;
+                        &.col-md-6 {
+                            max-width: 48%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
