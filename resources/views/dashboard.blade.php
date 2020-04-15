@@ -7,13 +7,13 @@
     @include('includes.message-block')
     <section class="">
         <div class="mc-box">
-            <header><h3>Say something to your friends...</h3></header>
+            <h3>Say something to your friends...</h3>
             <form action="{{ route('post.create')}}" method="post">
                 @csrf
                 <div class="">
-                    <textarea class="" name="body" id="new-post" rows="5" placeholder="Your Post"></textarea>
+                    <textarea class="uk-textarea" name="body" id="new-post" rows="5" placeholder="Your Post"></textarea>
                 </div>
-                <button type="submit" class="">Create Post</button>
+                <button type="submit" class="uk-button">Create Post</button>
             </form>
         </div>
     </section>
@@ -22,7 +22,7 @@
             <h3>What your friends say...</h3>
             @foreach($posts as $posts2)
               @foreach($posts2 as $post)
-                <article data-postid="{{$post->id}}" class="post">
+                <div class="uk-card uk-card-default uk-card-body uk-margin">
                       <p>{{$post->body}}</p>
                       <div class="">
                           Posted by {{$post->user->first_name}} on {{$post->created_at}}
@@ -51,23 +51,25 @@
                           @endif
                       </div>
                       <div class="">
-                        Comments
-                        @foreach($post->comments as $comment)
-                          <div class="">
-                            <p>{{$comment->content}}</p>
-                            <p>Commented by{{$comment->user->first_name}}</p>
-                          </div>
-                        @endforeach
+                        <button class="mc-toggle-comments uk-button">Comments</button>
+                        <div class="mc-comments">
+                          @foreach($post->comments as $comment)
+                            <div class="uk-card uk-card-default uk-card-body uk-margin">
+                              <p>{{$comment->content}}</p>
+                              <p>Commented by{{$comment->user->first_name}}</p>
+                            </div>
+                          @endforeach
+                        </div>
                         <form action="{{'/post/'.$post->id.'/comments'}}" method="post">
                           @csrf
                             <div class="">
                                 <input name="post_id" type="hidden" value="{{$post->id}}"/>
-                                <textarea class="" name="comment" id="comment-body" rows="5"></textarea>
+                                <textarea class="uk-textarea" name="comment" id="comment-body" rows="5"></textarea>
                             </div>
-                            <button type="submit" class="">Save changes</button>
+                            <button type="submit" class="uk-button">Save changes</button>
                         </form>
                       </div>
-                  </article>
+                    </div>
                   
                   {{-- <div class="ml faodade" id="{{"modal".$post->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -100,6 +102,11 @@
         </div>
     </section>
     <script>
+      $(".mc-comments").hide();
+      $(".mc-toggle-comments").click(function() {
+        $(this).parent().find(".mc-comments").toggle();
+      });
+
       var urlLike = '{{route('like')}}';
       var token = '{{ Session::token() }}';
       var data = "asxosixoaj";

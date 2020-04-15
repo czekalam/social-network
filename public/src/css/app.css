@@ -98,17 +98,17 @@ html body .mc-box .mc-user-search .mc-user-search-btn {
   padding: 10px;
 }
 
-html body.welcome .chat-box {
+html body.chat .chat-box {
   border: 1px solid #000;
   height: 50vh;
   overflow-y: scroll;
 }
 
-html body.welcome .chat-box .chat-box__row {
+html body.chat .chat-box .chat-box__row {
   display: flex;
 }
 
-html body.welcome .chat-box .chat-box__row .chat-box__message {
+html body.chat .chat-box .chat-box__row .chat-box__message {
   border-radius: 5px;
   background: #00f;
   margin: 10px;
@@ -116,11 +116,11 @@ html body.welcome .chat-box .chat-box__row .chat-box__message {
   color: #fff;
 }
 
-html body.welcome .chat-box .chat-box__row.chat-box__row--my {
+html body.chat .chat-box .chat-box__row.chat-box__row--my {
   justify-content: flex-end;
 }
 
-html body.welcome .chat-box .chat-box__row.chat-box__row--my .chat-box__message {
+html body.chat .chat-box .chat-box__row.chat-box__row--my .chat-box__message {
   background: #55f;
 }
 

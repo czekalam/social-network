@@ -7,7 +7,7 @@
 @section('page-class') chat @endsection
 
 @section('content')
-    <div class="chat">
+    <div class="mc-box">
         <h1>Chat</h1>
         <div id="chat-box" class="chat-box">
         </div>
@@ -15,9 +15,9 @@
             @csrf
             <div>
                 <input type="hidden" name="receiver" value="{{$receiver}}"/>
-                <textarea id="content" name="content" rows="5"></textarea>
+                <textarea class="uk-textarea" id="content" name="content" rows="5"></textarea>
             </div>
-            <div id="form-submit" type="submit" class="btn btn-primary">Save changes</div>
+            <button id="form-submit" type="submit" class="uk-button">Save changes</button>
         </form>
     </div>
     <script>
