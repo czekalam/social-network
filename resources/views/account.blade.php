@@ -26,6 +26,9 @@
             border:0;
             width:100%;
         }
+        .mc-margin {
+            margin: 10px;
+        }
     </style>
     <div class="col-md-6 offset-md-3 mc-box">
         <section class="row new-post">
@@ -46,12 +49,32 @@
                 </form>
             </div>
         </section>
-        @if (Storage::disk('local')->has($user->first_name . '-' . $user->id . '.jpg'))
+        @if (Storage::disk('local')->has($user->id . '.jpg'))
             <section class="row new-post">
                 <div class="col-md-6 col-md-offset-3">
-                    <img src="{{ route('account.image', ['filename' => $user->first_name . '-' . $user->id . '.jpg']) }}" alt="" class="img-responsive">
+                    <img style="width:50px;height:50px;" src="{{ route('account.image', ['user_id' => $user->id]) }}" alt="" class="img-responsive">
                 </div>
             </section>
         @endif
     </div>
+    <div>
+        <p>{{$user->first_name}}</p>
+        <p>{{$user->about_me}}</p>
+        @if (Storage::disk('local')->has($user->id . '.jpg'))
+            <section class="row new-post">
+                <div class="col-md-6 col-md-offset-3">
+                    <img style="width:50px;height:50px;" src="{{ route('account.image', ['user_id' => $user->id]) }}" alt="" class="img-responsive">
+                </div>
+            </section>
+        @endif
+        @if($user->posts)
+            @foreach($user->posts as $post)
+                <div class="mc-margin">
+                    <p>{{$post->body}}</p>
+                    <p>{{$post->created_at}}</p>
+                </div>
+            @endforeach
+        @endif
+    </div>
+
 @endsection

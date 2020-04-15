@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\User;
 use App\Friend;
 use Illuminate\Http\Request;
@@ -55,8 +53,14 @@ class UserController extends Controller {
         Auth::logout();
         return redirect()->route('home');
     }
-    public function getAccount()    {
-        return view('account', ['user'=>Auth::user()]);
+    public function getAccount($id=-1) {
+        if($id>-1) {
+            $user = User::where('id', $id)->first();
+            return view('account', ['user'=>$user]);
+        }
+        else {
+            return view('account', ['user'=>Auth::user()]);
+        }
     }
     public function postSaveAccount(Request $request)    {
         $this->validate($request, [
@@ -68,24 +72,15 @@ class UserController extends Controller {
         $user->about_me = $request['about_me'];
         $user->update();
         $file = $request->file('image');
-        $filename = $request['first_name'] . '-' . $user->id . '.jpg';
-        $old_filename = $old_name . '-' . $user->id . '.jpg';
-        $update = false;
-        if (Storage::disk('local')->has($old_filename)) {
-            $old_file = Storage::disk('local')->get($old_filename);
-            Storage::disk('local')->put($filename, $old_file);
-            $update = true;
-        }
-        if ($file) {
-            Storage::disk('local')->put($filename, File::get($file));
-        }
-        if ($update && $old_filename !== $filename) {
-            Storage::delete($old_filename);
-        }
+        $filename = $user->id.'.jpg';
+        Storage::disk('local')->put($filename, File::get($file));
         return redirect()->route('account');
     }
-    public function getUserImage($filename)    {
-        $file = Storage::disk('local')->get($filename);
+    public function getUserImage(Request $request){
+        $file = Storage::disk('local')->get('default.jpg');
+        if(Storage::disk('local')->has($request->user_id.'.jpg')) {
+            $file = Storage::disk('local')->get($request->user_id.'.jpg');
+        }
         return new Response($file, 200);
     }
 }

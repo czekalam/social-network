@@ -56,17 +56,17 @@
     </style>
     <div class="col-md-6 offset-md-3 mc-box">
         <p>Search somebody you know</p>
-        <form class="mc-user-search" action="" method="POST">
+        <form id="mc-user-search" class="mc-user-search">
             @csrf
             <input class="mc-user-search-text" type="text" name="friend_name"/>
-            <input class="mc-user-search-btn" type="submit" value="Search friend"><br/>
+            <input class="mc-user-search-btn" type="button" value="Search friend"><br/>
         </form>
         @foreach($users as $user)
             <div class="mc-user-box">
-                <img class="mc-user-thumb" src="https://picsum.photos/id/237/200/300">
-                <div class="mc-user-textbox">
-                    <p>Name:{{$user->first_name}}</p>
-                </div>
+                {{-- <img style="width:50px;height:50px;" src="{{ route('account.image', ['user_id' => $user->id]) }}" alt="" class="mc-user-thumb img-responsive"> --}}
+               <div class="mc-user-textbox">
+                    <p>Name:<a href="/account/{{$user->id}}">{{$user->first_name}}</a></p>
+                </div> 
                 @if(!$user->already_friended)
                     <form action="{{ route('friend.add') }}" method="POST">
                         @csrf
@@ -77,4 +77,17 @@
             </div>
         @endforeach
     </div>
+    <script>
+        $(".mc-user-search-btn").click(function(event) {
+            event.preventDefault();            
+            $('.mc-user-textbox p').each(function() {
+                if($(this).text()!==("Name:"+ $(".mc-user-search-text").val())) {
+                    $(this).parent().parent().hide();
+                }
+                else {
+                    $(this).parent().parent().show();
+                }
+            });
+        });
+    </script>
 @endsection

@@ -37,9 +37,9 @@
         @foreach($waiting_invite_users as $friend)
             @if(count($friend)>0)
                 <div class="mc-user-box">
-                    <img class="mc-user-thumb" src="https://picsum.photos/id/237/200/300">
+                    <img style="width:50px;height:50px;" src="{{ route('account.image', ['user_id' => $friend[0]->id]) }}" alt="" class="mc-user-thumb img-responsive">
                     <div class="mc-user-textbox">
-                        <p>Name:{{$friend[0]->first_name}}</p>
+                        <p>Name:<a href="/account/{{$friend[0]->id}}">{{$friend[0]->first_name}}</a></p>
                     </div>
                 </div>
             @endif
@@ -48,8 +48,8 @@
         @foreach($invited_friends as $friend)
             @if(count($friend)>0)
                 <div class="mc-user-box">
-                    <img class="mc-user-thumb" src="https://picsum.photos/id/237/200/300">
-                    <p>Name:{{$friend[0]->first_name}}</p>
+                    <img style="width:50px;height:50px;" src="{{ route('account.image', ['user_id' => $friend[0]->id]) }}" alt="" class="mc-user-thumb img-responsive">
+                    <p>Name:<a href="/account/{{$friend[0]->id}}">{{$friend[0]->first_name}}</a></p>
                     <form action="{{ route('friend.confirm') }}" method="POST">
                         @csrf
                         <input type="hidden" value={{$friend[0]->id}} name="friend_id"/>
@@ -62,8 +62,8 @@
         @foreach($friends as $friend)
             @if(count($friend)>0)
                 <div class="mc-user-box">
-                    <img class="mc-user-thumb" src="https://picsum.photos/id/237/200/300">
-                    <p>Name:{{$friend[0]->first_name}}</p>
+                    <img style="width:50px;height:50px;" src="{{ route('account.image', ['user_id' => $friend[0]->id]) }}" alt="" class="mc-user-thumb img-responsive">
+                    <p>Name:<a href="/account/{{$friend[0]->id}}">{{$friend[0]->first_name}}</a></p>
                     <form action="{{ route('chat.index') }}" method="GET">
                         @csrf
                         <input type="hidden" value={{$friend[0]->id}} name="friend_id"/>

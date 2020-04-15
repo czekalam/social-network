@@ -62,13 +62,17 @@ Route::group(['middleware'=>['web']], function() {
         'as' => 'account',
         'middleware' => 'auth'
     ]);
+    Route::get('/account/{id}',[
+        'uses' => 'UserController@getAccount',
+        'middleware' => 'auth'
+    ]);
     Route::post('/updateaccount',[
         'uses' => 'UserController@postSaveAccount',
         'as' => 'account.save',
         'middleware' => 'auth'
     ]);
     
-    Route::get('/userimage/{filename}', [
+    Route::get('/userimage/{user_id}', [
         'uses' => 'UserController@getUserImage',
         'as' => 'account.image',
         'middleware' => 'auth'
@@ -93,6 +97,26 @@ Route::group(['middleware'=>['web']], function() {
         'as' => 'post.delete',
         'middleware' => 'auth'
     ]);
+
+
+
+    Route::get('/post/{post_id}/comments',[
+        'uses' => 'CommentController@getComments',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/post/{post_id}/comments',[
+        'uses' => 'CommentController@postAddComment',
+        'as' => 'comment.create',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/post/{post_id}/comments/delete/{comment_id}',[
+        'uses' => 'CommentController@getDeleteComment',
+        'as' => 'comment.delete',
+        'middleware' => 'auth'
+    ]);
+
+
+    
     Route::post('/like', [
         'uses' => 'PostController@postLikePost',
         'as' => 'like',

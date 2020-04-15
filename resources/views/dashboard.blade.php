@@ -33,12 +33,44 @@
                           Posted by {{$post->user->first_name}} on {{$post->created_at}}
                       </div>
                       <div class="interaction">
-                          <a class="like" href="#">Like</a>
-                          <a class="like" href="#">Dislike</a>
+                          @php
+                              $like="";
+                              if($post->likes()->where("user_id", Auth::user()->id)->first()){
+                                $like = $post->likes()->where("user_id", Auth::user()->id)->first()->like;
+                              }
+                          @endphp
+                          @if($like == 1)
+                            <a class="like" href="#">Liked</a>
+                          @else
+                            <a class="like" href="#">Like</a>
+                          @endif
+                          @if($like == 0)
+                            <a class="dislike like" href="#">Disliked</a>
+                          @else
+                            <a class="dislike like" href="#">Dislike</a>
+                          @endif
+                          
                           @if(Auth::user() == $post->user)
                               <a data-toggle="modal" data-target="#{{"modal".$post->id}}" href="#">Edit</a>
                               <a href="{{ route('post.delete', ['post_id'=>$post->id])}}">Delete</a>
                           @endif
+                      </div>
+                      <div class="comments">
+                        Comments
+                        @foreach($post->comments as $comment)
+                          <div class="comment">
+                            <p>{{$comment->content}}</p>
+                            <p>Commented by{{$comment->user->first_name}}</p>
+                          </div>
+                        @endforeach
+                        <form action="{{'/post/'.$post->id.'/comments'}}" method="post">
+                          @csrf
+                            <div class="form-group">
+                                <input name="post_id" type="hidden" value="{{$post->id}}"/>
+                                <textarea class="form-control" name="comment" id="comment-body" rows="5"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </form>
                       </div>
                   </article>
                   
@@ -75,5 +107,37 @@
     <script>
       var urlLike = '{{route('like')}}';
       var token = '{{ Session::token() }}';
+      var data = "asxosixoaj";
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+      $( document ).ready(function() {
+        $(".like").click(function(event) {
+          event.preventDefault();
+          var $like = $(this);
+          if (!$(this).hasClass("dislike")) {
+            jQuery.ajax({
+              method: "POST",
+              url: urlLike,
+              data: {"post_id": $(this).parent().parent().data().postid, "isLike": true},
+            }).done(function(data,status,xhr) {
+              $like.text("Liked");
+              $like.siblings().text("Dislike");
+            });
+          }
+          else {
+            jQuery.ajax({
+              method: "POST",
+              url: urlLike,
+              data: {"post_id": $(this).parent().parent().data().postid, "isLike": false},
+            }).done(function(data,status,xhr) {
+              $like.text("Disliked");
+              $like.siblings().text("Like");
+            });
+          }
+        });
+      });
     </script>
 @endsection
