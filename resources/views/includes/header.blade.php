@@ -13,6 +13,9 @@
                         <a class="nav-link" href={{route('users')}}>Users</a>
                     </li>
                     <li>
+                        <a class="nav-link" href={{route('groups')}}>Groups</a>
+                    </li>
+                    <li>
                         <a class="btn" href={{route('account')}}>Account</a>
                     </li>
                     <li>

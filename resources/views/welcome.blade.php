@@ -8,39 +8,39 @@
 
 @section('content')
     @include('includes.message-block')
-    <div class="row mc-home-box-wrapper">
-        <div class="col-md-6 mc-home-box">
+    <div uk-grid class="mc-home-box-wrapper uk-child-width-1-2">
+        <div class="mc-home-box">
             <h3>Sign Up</h3>
             <form action="{{ route('signup') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="email">Your Email</label>
-                    <input class="form-control" type="email" name="email" id="email">
+                    <label class="uk-form-label" for="email">Your Email</label>
+                    <input class="uk-input" type="email" name="email" id="email">
                 </div>
                 <div class="form-group">
                     <label for="first_name">Your First Name</label>
-                    <input class="form-control" type="text" name="first_name" id="first_name">
+                    <input class="uk-input" type="text" name="first_name" id="first_name">
                 </div>
                 <div class="form-group">
-                    <label for="password">Your Password</label>
-                    <input class="form-control" type="password" name="password" id="password">
+                    <label class="uk-form-label" for="password">Your Password</label>
+                    <input class="uk-input" type="password" name="password" id="password">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="uk-button uk-button-primary">Submit</button>
             </form>
         </div>
-        <div class="col-md-6 mc-home-box">
+        <div class="mc-home-box">
             <h3>Sign In</h3>
             <form action="{{ route('signin') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="email">Your Email</label>
-                    <input class="form-control" type="email" name="email" id="email">
+                    <label class="uk-form-label" for="email">Your Email</label>
+                    <input class="uk-input" type="email" name="email" id="email">
                 </div>
                 <div class="form-group">
-                    <label for="password">Your Password</label>
-                    <input class="form-control" type="password" name="password" id="password">
+                    <label class="uk-form-label" for="password">Your Password</label>
+                    <input class="uk-input" type="password" name="password" id="password">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="uk-button uk-button-primary">Submit</button>
             </form>
         </div>
     </div>

@@ -24,6 +24,11 @@ Route::group(['middleware'=>['web']], function() {
         'as' => 'users',
         'middleware' => 'auth'
     ]);
+    Route::get('/groups',[
+        'uses' => 'GroupController@getIndex',
+        'as' => 'groups',
+        'middleware' => 'auth'
+    ]);
     Route::get('/friends',[
         'uses' => 'FriendController@getFriends',
         'as' => 'friends',
