@@ -7,8 +7,6 @@ Route::group(['middleware'=>['web']], function() {
         return view('welcome');
     })->name('home');
 
-
-
     Route::get('/scissors', function () {
         return view('games.scissors');
     })->name('scissors');
@@ -17,18 +15,73 @@ Route::group(['middleware'=>['web']], function() {
         return view('games.bird');
     })->name('bird');
 
-
-
     Route::get('/users',[
         'uses' => 'UserController@getUsers',
         'as' => 'users',
         'middleware' => 'auth'
     ]);
+
+
+
+
+
+
+
     Route::get('/groups',[
         'uses' => 'GroupController@getIndex',
         'as' => 'groups',
         'middleware' => 'auth'
     ]);
+    Route::get('/groups/{id}',[
+        'uses' => 'GroupController@getSingle',
+        'as' => 'groups.single',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/groups/{id}/delete',[
+        'uses' => 'GroupController@getDelete',
+        'as' => 'groups.delete',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/groups/add',[
+        'uses' => 'GroupController@postAddGroup',
+        'as' => 'groups.add',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/groups/users/add',[
+        'uses' => 'GroupController@postAddUser',
+        'as' => 'groups.user.add',
+        'middleware' => 'auth'
+    ]);  
+    Route::post('/groups/{id}/users/{id}/delete',[
+        'uses' => 'GroupController@getDeleteUser',
+        'as' => 'groups.user.delete',
+        'middleware' => 'auth'
+    ]); 
+
+    Route::get('/groups/{id}/chat',[
+        'uses' => 'GroupController@getChat',
+        'as' => 'groups.chat',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/groups/{id}/chat/message/add',[
+        'uses' => 'GroupController@postAddMessage',
+        'as' => 'groups.message.add',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/groups/{id}/chat/data',[
+        'uses' => 'GroupController@getMessages',
+        'as' => 'groups.message.get',
+        'middleware' => 'auth'
+    ]);
+     
+
+
+
+
+
+
+
+
     Route::get('/friends',[
         'uses' => 'FriendController@getFriends',
         'as' => 'friends',

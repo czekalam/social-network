@@ -29,6 +29,16 @@
                                 </form>
                             </div>
                         @endif
+                        <form action="{!! route('groups.user.add') !!}" method="POST">
+                            @csrf
+                            <input type="hidden" value={{$user->id}} name="user_id"/>
+                            <select class="uk-select" name="group">
+                                @foreach($groups as $group)
+                                    <option value={{$group->id}}>{{$group->name}}</option>
+                                @endforeach
+                            </select>
+                            <button class="uk-button" type="submit"><i class="fas fa-user-friends"></i></button>
+                        </form>
                     </div>
                 </div>
             @endforeach

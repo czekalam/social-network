@@ -15,8 +15,10 @@ class CreateGroupsTable extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->json("users");
-            $table->json("messages");
+            $table->text('name');
+            $table->json("users")->default('{}');
+            $table->json("posts")->default('{}');
+            $table->json("messages")->default('{}');
             $table->timestamps();
         });
     }

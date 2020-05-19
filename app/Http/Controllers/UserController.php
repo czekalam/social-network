@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\User;
 use App\Friend;
+use App\Group;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,18 @@ class UserController extends Controller {
                 $user->already_friended = 1;
             }
         }
-        return view('users',['users'=>$users]);
+        $groups = Group::all();
+        $users_groups = [];
+        foreach($groups as $group) {
+            foreach(json_decode($group->users) as $user) {
+                if($user[1]==Auth::user()->id) {
+                    if($user[0] == "A") {
+                        array_push($users_groups, $group);
+                    }
+                }
+            }
+        }
+        return view('users',['users'=>$users,'groups'=>$users_groups]);
     }
     public function postSignUp(Request $request) {
         $request->validate([
