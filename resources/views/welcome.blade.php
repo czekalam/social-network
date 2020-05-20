@@ -8,6 +8,9 @@
 
 @section('content')
     @include('includes.message-block')
+    <video autoplay muted loop id="myVideo">
+        <source src="{{ URL::to('src/images/video.mp4')}}" type="video/mp4">
+    </video>
     <div uk-grid class="mc-home-box-wrapper uk-child-width-1-2">
         <div class="mc-home-box">
             <h3>Sign Up</h3>

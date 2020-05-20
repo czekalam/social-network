@@ -52,7 +52,7 @@ Route::group(['middleware'=>['web']], function() {
         'as' => 'groups.user.add',
         'middleware' => 'auth'
     ]);  
-    Route::post('/groups/{id}/users/{id}/delete',[
+    Route::get('/groups/{group_id}/users/{user_id}/delete',[
         'uses' => 'GroupController@getDeleteUser',
         'as' => 'groups.user.delete',
         'middleware' => 'auth'
@@ -68,7 +68,7 @@ Route::group(['middleware'=>['web']], function() {
         'as' => 'groups.message.add',
         'middleware' => 'auth'
     ]);
-    Route::post('/groups/{id}/chat/data',[
+    Route::get('/groups/{id}/chat/data',[
         'uses' => 'GroupController@getMessages',
         'as' => 'groups.message.get',
         'middleware' => 'auth'

@@ -31,6 +31,7 @@ class GroupController extends Controller {
         $group = new Group();
         $group->name = $request->name;
         $group->users = json_encode([["A",Auth::user()->id]]);
+        $group->messages= json_encode([]);
         $group->save();
         return redirect()->route('dashboard');
     }
@@ -42,20 +43,35 @@ class GroupController extends Controller {
         $group->save();
         return redirect()->route('dashboard');
     }
-    public function getDeleteUser(Request $request) {
-        dd($request);
+    public function getDeleteUser($group_id,$user_id) {
+        $group=Group::where("id",$group_id)->first();
+        $users = json_decode($group->users);
+        
+        foreach($users as $key => $value) {
+            if($user_id==$value[1]) {
+                unset($users[$key]);
+            }
+        }
+        $group->users = json_encode($users);
+        $group->save();
+        return redirect()->route('dashboard');
     }
     public function getChat($id) {
         $group = Group::where('id',$id)->first();
-        // foreach(json_decode($group->users) as $user) { 
-        //     echo $user;
-        // }
         return view('groups.chat', ["group"=>$group]);
     }
     public function postAddMessage(Request $request) {
-        dd($request);
+        $group = Group::where('id',$request->group)->first();
+        $messages = json_decode($group->messages);
+        array_push($messages,[$request->content,1]);
+        $messages= $messages;
+        $group->messages = json_encode($messages);
+        $group->save();
+        return redirect()->route('dashboard');
     }
     public function getMessages(Request $request) {
-        dd($request);
+        $group = Group::where('id',$request->id)->first();
+        $messages=$group->messages;
+        return json_decode($messages);
     }
 }

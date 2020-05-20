@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="mc-box">
-        <h1>Czat</h1>
+        <h1>Chat</h1>
         <h1>{{ $group->name }}</h1>
         <div id="chat-box" class="chat-box">
         </div>
@@ -37,7 +37,7 @@
                     postMessage();
                 }
             });
-            WsetInterval(function(){
+            setInterval(function(){
                 getMessages();
             }, 500);
             $('#form-submit').click(function(event) {
@@ -46,10 +46,22 @@
             function getMessages() {
                 $.ajax({
                     method: "GET",
-                    url: "/groups/{id}/chat",
-                    data: {"author": {{Auth::user()->id}}},
+                    url: "/groups/1/chat/data",
+                    data: {"id":{{$group->id}}},
                     success: function(data) {
-                        dd(data);
+                        $('#chat-box').empty();
+                        $.each( data, function( index, value ){
+                            var $item = $('<div>').addClass("chat-box__row").append(
+                                $('<div>').addClass("chat-box__message").append(value[0])
+                            )
+                            if(value[1]=={{Auth::user()->id}}) {
+                                $item.addClass("chat-box__row--my");
+                            }
+                            else {
+                                $item.addClass("chat-box__row--sb");
+                            }
+                            $('#chat-box').append($item);
+                        });
                     }
                 });
             }
@@ -57,14 +69,11 @@
                 var data = $("#content").val();
                 $.ajax({
                     method: "POST",
-                    url: "/groups/chat/{id}/add",
-                    data: {"content": data, "author": {{Auth::user()->id}}},
+                    url: "/groups/1/chat/message/add",
+                    data: {"content": data, "group": {{ $group->id }}},
                     success: function(data) {
                         $('#chat-box').empty();
                         $('#content').val('');
-                        $.each( data, function( index, value ){
-                            dd();
-                        })
                     }
                 });
             }

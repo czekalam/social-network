@@ -20,7 +20,7 @@
     
     <h3>Users</h3>
     @foreach($users as $user)
-        {{ $user->first_name }} <a href="">delete user</a>
+        {{ $user->first_name }} <a href="{!! route('groups.user.delete', ['group_id'=>$group->id,'user_id' => $user->id]) !!}">delete user</a>
     @endforeach
 
     <a href="{!! route('groups.chat', ['id' => $group->id]) !!}">chat</a>

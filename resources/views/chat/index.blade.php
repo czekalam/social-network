@@ -38,9 +38,11 @@
             setInterval(function(){
                 getMessages();
             }, 500);
+            
             $('#form-submit').click(function(event) {
                 postMessage();
             });
+
             function getMessages() {
                 $.ajax({
                     method: "GET",

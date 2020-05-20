@@ -119,8 +119,14 @@ html {
             }
         }
         &.welcome {
-            // background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url("{{ URL::to('src/images/home-bg.jpg')}}");
-            .container {
+            #myVideo {
+                position: fixed;
+                right: 0;
+                bottom: 0;
+                min-width: 100%;
+                min-height: 100%;
+            }
+            .uk-container {
                 height: 100%;
                 display: flex;
                 justify-content: center;
@@ -128,6 +134,11 @@ html {
                 padding-top:40px;
                 .mc-home-box-wrapper {
                     width: 100%;
+                    position: relative;
+                    justify-content: center;
+                    flex-direction: row;
+                    bottom: 0;
+                    padding: 20px;
                     .mc-home-box {
                         background: #fff;
                         border-radius: 10px;
