@@ -157,7 +157,7 @@ html body.welcome .uk-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 40px;
+  padding: 0;
 }
 
 html body.welcome .uk-container .mc-home-box-wrapper {
@@ -170,14 +170,33 @@ html body.welcome .uk-container .mc-home-box-wrapper {
 }
 
 html body.welcome .uk-container .mc-home-box-wrapper .mc-home-box {
-  background: #fff;
-  border-radius: 10px;
+  background-color: #15202b;
+  color: #fff;
+  border-radius: 5px;
   box-shadow: 0px 0px 20px #000;
   padding: 50px;
   margin: 1%;
+  max-width: 48%;
 }
 
-html body.welcome .uk-container .mc-home-box-wrapper .mc-home-box.col-md-6 {
-  max-width: 48%;
+html body.welcome .uk-container .mc-home-box-wrapper .mc-home-box.uk-width-1-1 {
+  max-width: 100%;
+}
+
+html body.welcome .uk-container .mc-home-box-wrapper .mc-home-box h1,
+html body.welcome .uk-container .mc-home-box-wrapper .mc-home-box h3,
+html body.welcome .uk-container .mc-home-box-wrapper .mc-home-box label {
+  color: #fff;
+  position: relative;
+  top: -5px;
+}
+
+html body.welcome .uk-container .mc-home-box-wrapper .mc-home-box .form-group {
+  margin-bottom: 20px;
+}
+
+html body.welcome .uk-container .mc-home-box-wrapper .mc-home-box button {
+  width: 100%;
+  margin-top: 10px;
 }
 

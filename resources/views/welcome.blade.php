@@ -12,6 +12,10 @@
         <source src="{{ URL::to('src/images/video.mp4')}}" type="video/mp4">
     </video>
     <div uk-grid class="mc-home-box-wrapper uk-child-width-1-2">
+        <div class="uk-width-1-1 mc-home-box">
+            <h1>Welcome in Social Space</h1>
+            <p>Sign in or Create an account to enjoy Social Space.</p>
+        </div>
         <div class="mc-home-box">
             <h3>Sign Up</h3>
             <form action="{{ route('signup') }}" method="POST">
