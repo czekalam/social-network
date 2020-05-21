@@ -67,8 +67,30 @@ html body .mc-box textarea {
   color: #fff;
 }
 
+html body .mc-box h1,
+html body .mc-box h2,
 html body .mc-box h3 {
   color: #fff;
+}
+
+html body .mc-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+html body .mc-box ul li {
+  padding: 10px;
+  border: 1px solid #aaa;
+}
+
+html body .mc-box ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+
+html body .mc-box ul li a span {
+  background: red;
+  border-radius: 50%;
 }
 
 html body .mc-box .uk-card {

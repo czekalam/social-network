@@ -51,8 +51,24 @@ html {
                 border: 0;
                 color: #fff;
             }
-            h3 {
+            h1,h2,h3 {
                 color:#fff;
+            }
+            ul {
+                list-style: none;
+                padding: 0;
+                li{
+                    padding: 10px;
+                    border: 1px solid #aaa;
+                    a {
+                        text-decoration: none;
+                        color: #fff;
+                        span {
+                            background: red;
+                            border-radius: 50%;
+                        }
+                    }
+                }
             }
             .uk-card {
                 background: #15202b;
