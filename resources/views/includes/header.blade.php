@@ -1,5 +1,8 @@
 <div class="mc-position-top">
     <header>
+        <div class="mc-logo">
+            <h1>Social space</h1>
+        </div>
         <div class="uk-navbar-container" uk-navbar>
             <div class="uk-navbar-center">
                 <ul class="uk-navbar-nav">

@@ -4,7 +4,13 @@ html {
 
 html body {
   position: relative;
-  background: #eee;
+  background: #0B1016;
+}
+
+html body .uk-button {
+  background: #4cd964;
+  color: #fff;
+  margin-top: 20px;
 }
 
 html body header {
@@ -49,10 +55,29 @@ html body .mc-user-box:last-child {
 }
 
 html body .mc-box {
-  background: #fff;
+  background: #15202b;
   border-radius: 10px;
   padding: 50px;
   margin-bottom: 20px;
+}
+
+html body .mc-box textarea {
+  background: #253341;
+  border: 0;
+  color: #fff;
+}
+
+html body .mc-box h3 {
+  color: #fff;
+}
+
+html body .mc-box .uk-card {
+  background: #15202b;
+  box-shadow: 0px 0px 1px #fff;
+}
+
+html body .mc-box .uk-card p {
+  color: #fff;
 }
 
 html body .mc-box .mc-account-input {
@@ -125,8 +150,31 @@ html body.chat .chat-box .chat-box__row.chat-box__row--my .chat-box__message {
 }
 
 html body .mc-position-top {
-  background: #fff;
+  background: #15202b;
   width: 100%;
+}
+
+html body .mc-position-top header .mc-logo h1 {
+  color: #fff;
+  text-align: center;
+  padding: 50px;
+  font-family: "Kalam", cursive;
+}
+
+html body .mc-position-top .uk-navbar {
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  background: #15202b;
+}
+
+html body .mc-position-top .uk-navbar a {
+  color: #fff;
+  cursor: pointer;
+}
+
+html body .mc-position-top .uk-navbar a:hover {
+  color: #ddd;
+  cursor: pointer;
 }
 
 html body .mc-position-top .mc-weather {
@@ -142,6 +190,17 @@ html body .mc-position-top .mc-weather .mc-weather__wrapper {
 html body .mc-position-top .mc-weather .mc-weather__wrapper,
 html body .mc-position-top .mc-weather .mc-weather__wrapper ul {
   list-style: none;
+}
+
+html body .mc-position-top .mc-weather .mc-weather__wrapper > li {
+  background: #fff;
+  margin: 10px;
+  padding: 50px;
+  border-radius: 5px;
+}
+
+html body .mc-position-top .mc-weather .mc-weather__wrapper > li ul {
+  padding: 0;
 }
 
 html body.welcome #myVideo {

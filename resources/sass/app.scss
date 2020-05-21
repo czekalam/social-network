@@ -1,8 +1,13 @@
 html {
     height: 100%;
     body {
+        .uk-button {
+            background:#4cd964;
+            color:#fff;
+            margin-top:20px;
+        }
         position: relative;
-        background:#eee;
+        background:#0B1016;
         header {
             position: relative;
             width: 100%;
@@ -37,10 +42,25 @@ html {
             }
         }
         .mc-box {
-            background: #fff;
+            background: #15202b;
             border-radius: 10px;
             padding: 50px;
             margin-bottom:20px;
+            textarea {
+                background: rgb(37, 51, 65);
+                border: 0;
+                color: #fff;
+            }
+            h3 {
+                color:#fff;
+            }
+            .uk-card {
+                background: #15202b;
+                box-shadow: 0px 0px 1px #fff;
+                p {
+                    color: #fff;
+                }
+            }
             .mc-account-input {
                 border:none;
                 border:1px solid #ccc;
@@ -104,8 +124,29 @@ html {
             }
         }
         .mc-position-top {
-            background: #fff;
+            background: #15202b;
             width:100%;
+            header{
+                .mc-logo h1{
+                    color: #fff;
+                    text-align: center;
+                    padding: 50px;
+                    font-family: 'Kalam', cursive;
+                }
+            }
+            .uk-navbar {
+                border-top: 1px solid #fff;
+                border-bottom: 1px solid #fff;
+                background: #15202b;
+                a {
+                    color: #fff;
+                    cursor: pointer;
+                }
+                a:hover {
+                    color: #ddd;
+                    cursor: pointer;
+                }
+            }
             .mc-weather {
                 padding: 20px;
                 width: 100%;
@@ -114,6 +155,15 @@ html {
                     justify-content: center;
                     &,ul {
                         list-style: none;
+                    }
+                    & > li {
+                        background: #fff;
+                        margin: 10px;
+                        padding: 50px;
+                        border-radius: 5px;
+                        ul {
+                            padding: 0;
+                        }
                     }
                 }
             }
