@@ -58,6 +58,8 @@ Route::group(['middleware'=>['web']], function() {
         'middleware' => 'auth'
     ]); 
 
+
+    
     Route::get('/groups/{id}/chat',[
         'uses' => 'GroupController@getChat',
         'as' => 'groups.chat',
@@ -71,6 +73,16 @@ Route::group(['middleware'=>['web']], function() {
     Route::get('/groups/{id}/chat/data',[
         'uses' => 'GroupController@getMessages',
         'as' => 'groups.message.get',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/groups/{id}/chat/post/add',[
+        'uses' => 'GroupController@postPost',
+        'as' => 'groups.post.add',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/groups/{id}/chat/post/{post_id}/add',[
+        'uses' => 'GroupController@postPostComment',
+        'as' => 'groups.post.comment.add',
         'middleware' => 'auth'
     ]);
      
@@ -135,6 +147,8 @@ Route::group(['middleware'=>['web']], function() {
         'as' => 'account.image',
         'middleware' => 'auth'
     ]);
+
+    
     Route::get('/dashboard',[
         'uses' => 'PostController@getDashboard',
         'as' => 'dashboard',

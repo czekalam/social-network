@@ -17,7 +17,7 @@
                 <input type="hidden" name="receiver" value="{{$receiver}}"/>
                 <textarea class="uk-textarea" id="content" name="content" rows="5"></textarea>
             </div>
-            <button id="form-submit" type="submit" class="uk-button">Save changes</button>
+            {{-- <button id="form-submit" type="submit" class="uk-button">Save changes</button> --}}
         </form>
     </div>
     <script>

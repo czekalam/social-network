@@ -44,6 +44,7 @@ class FriendController extends Controller {
     }
     public function postConfirmFriend(Request $request) {
         $friend = Friend::where('user2', $request->friend_id)->first();
+        $friend = Friend::where('user1', $request->friend_id)->first();
         $friend->accepted = 1;
         $friend->update();
         return redirect()->back();

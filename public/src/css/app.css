@@ -7,6 +7,38 @@ html body {
   background: #0B1016;
 }
 
+html body .mc-infobox {
+  background: #4cd964;
+  color: #fff;
+  padding: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+html body .mc-no-margin {
+  margin: 0 !important;
+  width: 100%;
+}
+
+html body .mc-link-white {
+  color: #fff;
+  text-decoration: none;
+}
+
+html body .mc-label-white {
+  color: #fff;
+}
+
+html body .mc-featured-box {
+  box-shadow: 0px 0px 1px #fff;
+  padding: 20px;
+}
+
+html body .mc-chat-img {
+  height: 35px;
+  margin: 10px;
+}
+
 html body .uk-button {
   background: #4cd964;
   color: #fff;
@@ -113,13 +145,16 @@ html body .mc-box .mc-account-input {
   margin: 5px 0;
 }
 
+html body .mc-box .mc-account-img img {
+  max-height: 200px;
+}
+
 html body .mc-box .mc-account-file {
   border: 0;
   width: 100%;
 }
 
 html body .mc-box .mc-user-search {
-  border: 1px solid #ccc;
   border-radius: 10px;
   padding-left: 7px;
   padding-right: 7px;
@@ -129,7 +164,8 @@ html body .mc-box .mc-user-search {
 html body .mc-box .mc-user-search .mc-user-search-text {
   border: none;
   outline: none;
-  width: 76%;
+  width: 100%;
+  padding: 20px;
   font-size: 20px;
   margin: 10px 0;
 }

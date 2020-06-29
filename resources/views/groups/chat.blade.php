@@ -4,12 +4,11 @@
     Groups
 @endsection
 
-@section('page-class') groups @endsection
+@section('page-class') groups chat @endsection
 
 @section('content')
     <div class="mc-box">
-        <h1>Chat</h1>
-        <h1>{{ $group->name }}</h1>
+        <h1>Chat of {{ $group->name }}</h1>
         <div id="chat-box" class="chat-box">
         </div>
         <form id="message-form" action="#" method="post">
@@ -18,11 +17,13 @@
                 <input type="hidden" name="author" value="{{Auth::user()->id}}"/>
                 <textarea class="uk-textarea" id="content" name="content" rows="5"></textarea>
             </div>
-            <button id="form-submit" type="submit" class="uk-button">Send</button>
         </form>
     </div>
 
     <script>
+        $("#message-form").click(function(e) {
+            e.preventDefault();
+        });
         var chatBox = document.getElementById("chat-box");
         $.ajaxSetup({
             headers: {
@@ -46,14 +47,16 @@
             function getMessages() {
                 $.ajax({
                     method: "GET",
-                    url: "/groups/1/chat/data",
+                    url: "/groups/"+{{$group->id}}+"/chat/data",
                     data: {"id":{{$group->id}}},
                     success: function(data) {
                         $('#chat-box').empty();
                         $.each( data, function( index, value ){
                             var $item = $('<div>').addClass("chat-box__row").append(
                                 $('<div>').addClass("chat-box__message").append(value[0])
-                            )
+                            ).append(
+                                $('<img>').attr("src",'/userimage/'+value[1]).addClass("mc-chat-img")
+                            );
                             if(value[1]=={{Auth::user()->id}}) {
                                 $item.addClass("chat-box__row--my");
                             }
@@ -69,7 +72,7 @@
                 var data = $("#content").val();
                 $.ajax({
                     method: "POST",
-                    url: "/groups/1/chat/message/add",
+                    url: "/groups/"+{{$group->id}}+"/chat/message/add",
                     data: {"content": data, "group": {{ $group->id }}},
                     success: function(data) {
                         $('#chat-box').empty();

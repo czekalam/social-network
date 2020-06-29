@@ -18,13 +18,17 @@ class PostController extends Controller {
         $friends2 =Friend::where('user1',Auth::user()->id)->where('user2', '!=' , Auth::user()->id)->get();
         $friendList=[];
         foreach($friends as $friend) {
-            if(User::where('id',$friend->user1)->first()) {
-                array_push($posts,User::where('id',$friend->user1)->first()->posts()->get());
+            if($friend->accepted>0) {
+                if(User::where('id',$friend->user1)->first()) {
+                    array_push($posts,User::where('id',$friend->user1)->first()->posts()->get());
+                }
             }
         }
         foreach($friends2 as $friend) {
-            if(User::where('id',$friend->user2)->first()) {
-                array_push($posts,User::where('id',$friend->user2)->first()->posts()->get());
+            if($friend->accepted>0) {
+                if(User::where('id',$friend->user2)->first()) {
+                    array_push($posts,User::where('id',$friend->user2)->first()->posts()->get());
+                }
             }
         }
         return view('dashboard', ["posts" => $posts]);

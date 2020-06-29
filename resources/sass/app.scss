@@ -1,6 +1,32 @@
 html {
     height: 100%;
     body {
+        .mc-infobox {
+            background: #4cd964;
+            color: #fff;
+            padding: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .mc-no-margin {
+            margin:0!important;
+            width: 100%;
+        }
+        .mc-link-white {
+            color: #fff;
+            text-decoration: none;
+        }
+        .mc-label-white {
+            color: #fff;
+        }
+        .mc-featured-box {
+            box-shadow: 0px 0px 1px #fff;
+            padding: 20px;
+        }
+        .mc-chat-img {
+            height: 35px;
+            margin: 10px;
+        }
         .uk-button {
             background:#4cd964;
             color:#fff;
@@ -87,12 +113,14 @@ html {
                 width: 100%;
                 margin:5px 0;
             }
+            .mc-account-img img {
+                max-height: 200px;
+            }
             .mc-account-file {
                 border:0;
                 width:100%;
             }
             .mc-user-search {
-                border:1px solid #ccc;
                 border-radius: 10px;
                 padding-left: 7px;
                 padding-right: 7px;
@@ -100,7 +128,8 @@ html {
                 .mc-user-search-text {
                     border: none;
                     outline: none;
-                    width: 76%;
+                    width: 100%;
+                    padding: 20px;
                     font-size: 20px;
                     margin: 10px 0;
                 }

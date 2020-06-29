@@ -9,16 +9,17 @@
 @section('content')
     <div class="mc-box">
         @if($user==Auth::user())
-            <div class="">
+            <div class="uk-margin-large-bottom">
                 <h3>Your Account</h3>
                 <form action="{{ route('account.save') }}" method="post" enctype="multipart/form-data">
                     <div class="">
-                        <label for="first_name">First Name</label>
-                        <input type="text" name="first_name" class="uk-input" value="{{ $user->first_name }}" id="first_name">
-                        <textarea class="uk-textarea" name="about_me">About me</textarea>
+                        <label class="mc-label-white" for="first_name">First Name</label>
+                        <input type="text" name="first_name" class="uk-input uk-margin-bottom" value="{{ $user->first_name }}" id="first_name">
+                        <label class="mc-label-white" for="about_me">About me</label>
+                        <textarea class="uk-textarea uk-margin-bottom" name="about_me">About me</textarea>
                     </div>
                     <div class="">
-                        <label for="image">Image</label>
+                        <label class="mc-label-white" for="image">Image</label>
                         <input class="mc-account-file" type="file" name="image" class="" id="image">
                     </div>
                     <button type="submit" class="uk-button">Save Account</button>
@@ -27,17 +28,18 @@
             </div>
         @else
             <div>
-                <h3>{{$user->first_name}}</h3>
-                <p>{{$user->about_me}}</p>
                 @if (Storage::disk('local')->has($user->id . '.jpg'))
-                    <div class="">
-                        <img src="{{ route('account.image', ['user_id' => $user->id]) }}">
-                    </div>
+                <div class="mc-account-img">
+                    <img src="{{ route('account.image', ['user_id' => $user->id]) }}">
+                </div>
                 @endif
+                <h3>{{$user->first_name}}</h3>
+                <p class="mc-label-white mc-featured-box">{{$user->about_me}}</p>
             </div>
         @endif
         <div>
-            @if($user->posts)
+            @if(count($user->posts))
+                <h3>User posts</h3>
                 @foreach($user->posts as $post)
                     <div class="uk-card uk-card-default uk-card-body uk-margin">
                         <div class="mc-margin">
@@ -50,17 +52,17 @@
                               @foreach($post->comments as $comment)
                                 <div class="uk-card uk-card-default uk-card-body uk-margin">
                                   <p>{{$comment->content}}</p>
-                                  <p>Commented by{{$comment->user->first_name}}</p>
+                                  <p>Commented by {{$comment->user->first_name}}</p>
                                 </div>
                               @endforeach
                             </div>
-                            <form action="{{'/post/'.$post->id.'/comments'}}" method="post">
+                            <form class="uk-margin-top" action="{{'/post/'.$post->id.'/comments'}}" method="post">
                               @csrf
                                 <div class="">
                                     <input name="post_id" type="hidden" value="{{$post->id}}"/>
                                     <textarea class="uk-textarea" name="comment" id="comment-body" rows="5"></textarea>
                                 </div>
-                                <button type="submit" class="uk-button">Save changes</button>
+                                <button type="submit" class="uk-button uk-margin-remove-top">Send comment</button>
                             </form>
                           </div>
                     </div>
@@ -68,4 +70,10 @@
             @endif
         </div>
     </div>
+    <script>
+        $(".mc-comments").hide();
+        $(".mc-toggle-comments").click(function() {
+          $(this).parent().find(".mc-comments").toggle();
+        });
+    </script>
 @endsection
