@@ -22,7 +22,7 @@
             <h3>What your friends say...</h3>
             @foreach($posts as $posts2)
               @foreach($posts2 as $post)
-                <div class="uk-card uk-card-default uk-card-body uk-margin">
+                <div data-postid={{$post->id}} class="uk-card uk-card-default uk-card-body uk-margin">
                       <p>{{$post->body}}</p>
                       <div class="">
                           Posted by {{$post->user->first_name}} on {{$post->created_at}}
@@ -36,12 +36,12 @@
                           @endphp
                           @if($like == 1)
                             <a class="like" href="#">Liked</a>
-                          @else
+                            <a class="dislike like" href="#">Dislike</a>
+                          @elseif($like == "0")
                             <a class="like" href="#">Like</a>
-                          @endif
-                          @if($like == 0)
                             <a class="dislike like" href="#">Disliked</a>
                           @else
+                            <a class="like" href="#">Like</a>
                             <a class="dislike like" href="#">Dislike</a>
                           @endif
                           

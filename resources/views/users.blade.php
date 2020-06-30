@@ -5,6 +5,8 @@
 @endsection
 @section('page-class') users @endsection
 @section('content')
+    @include('includes.info-box')
+    @include('includes.message-block')
     <div class="mc-box">
         <h3>Search somebody you know</h3>
         <div class="mc-user-search">

@@ -5,6 +5,7 @@ html {
 html body {
   position: relative;
   background: #0B1016;
+  min-height: 100vh;
 }
 
 html body .mc-infobox {
@@ -236,7 +237,7 @@ html body .mc-position-top .uk-navbar a:hover {
 }
 
 html body .mc-position-top .mc-weather {
-  padding: 20px;
+  padding: 20px 0;
   width: 100%;
 }
 

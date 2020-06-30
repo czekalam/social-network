@@ -61,14 +61,16 @@
                                 </div>
                               @endforeach
                             </div>
-                            <form class="uk-margin-top" action="{{'/post/'.$post->id.'/comments'}}" method="post">
-                              @csrf
-                                <div class="">
-                                    <input name="post_id" type="hidden" value="{{$post->id}}"/>
-                                    <textarea class="uk-textarea" name="comment" id="comment-body" rows="5"></textarea>
-                                </div>
-                                <button type="submit" class="uk-button uk-margin-remove-top">Send comment</button>
-                            </form>
+                            @if($isFriend)
+                                <form class="uk-margin-top" action="{{'/post/'.$post->id.'/comments'}}" method="post">
+                                @csrf
+                                    <div class="">
+                                        <input name="post_id" type="hidden" value="{{$post->id}}"/>
+                                        <textarea class="uk-textarea" name="comment" id="comment-body" rows="5"></textarea>
+                                    </div>
+                                    <button type="submit" class="uk-button uk-margin-remove-top">Send comment</button>
+                                </form>
+                            @endif
                           </div>
                     </div>
                 @endforeach

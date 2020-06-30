@@ -32,7 +32,7 @@ class GroupController extends Controller {
             return view('groups.single',["posts"=>(object)$posts,"group"=>$group,"users"=>(object)$users,"isAdmin"=>$isAdmin]);
         }
         $message="You are not a member of this group";
-        return redirect()->back()->with(['message' => $message]);;
+        return redirect()->back()->with(['message' => $message]);
     }
     public function getDelete($id) {
         $group=Group::where("id",$id)->delete();
@@ -52,11 +52,15 @@ class GroupController extends Controller {
     }
     public function postAddUser(Request $request) {
         $group=Group::where("id",$request->group)->first();
-        $users = json_decode($group->users);
-        array_push($users, ["N",$request->user_id]);
-        $group->users = json_encode($users);
-        $group->save();
-        return redirect()->back();
+        $message="You have to choose a group";
+        if($group) {
+            $users = json_decode($group->users);
+            array_push($users, ["N",$request->user_id]);
+            $group->users = json_encode($users);
+            $group->save();
+            $message="User added to group";
+        }
+        return redirect()->back()->with(['message' => $message]);
     }
     public function getDeleteUser($group_id,$user_id) {
         $group=Group::where("id",$group_id)->first();

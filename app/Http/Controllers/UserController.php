@@ -67,12 +67,19 @@ class UserController extends Controller {
         return redirect()->route('home');
     }
     public function getAccount($id=-1) {
+        $isFriend=0;
         if($id>-1) {
             $user = User::where('id', $id)->first();
-            return view('account', ['user'=>$user]);
+            $friends = Friend::where('accepted',1)->where('user2',$user->id)->orWhere('user1',$user->id)->where('accepted',1)->get();
+            foreach ($friends as $friend) {
+                if($friend->id == Auth::user()->id) {
+                    $isFriend = 1;
+                }
+            }
+            return view('account', ['user'=>$user,"isFriend"=>$isFriend]);
         }
         else {
-            return view('account', ['user'=>Auth::user()]);
+            return view('account', ['user'=>Auth::user(), "isFriend"=>1]);
         }
     }
     public function postSaveAccount(Request $request)    {
