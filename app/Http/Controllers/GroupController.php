@@ -15,11 +15,24 @@ class GroupController extends Controller {
     public function getSingle($id) {
         $group=Group::where("id",$id)->first();
         $users=[];
+        $isAdmin=0;
+        $isInGroup=0;
+
         foreach(json_decode($group->users) as $user) {
+            if($user[1]==Auth::user()->id) {
+                $isInGroup=1;
+                if($user[0]=="A") {
+                    $isAdmin=1;
+                }
+            }
             array_push($users, User::where("id",$user[1])->first());
         }
         $posts= json_decode($group->posts);
-        return view('groups.single',["posts"=>(object)$posts,"group"=>$group,"users"=>(object)$users]);
+        if($isInGroup) {
+            return view('groups.single',["posts"=>(object)$posts,"group"=>$group,"users"=>(object)$users,"isAdmin"=>$isAdmin]);
+        }
+        $message="You are not a member of this group";
+        return redirect()->back()->with(['message' => $message]);;
     }
     public function getDelete($id) {
         $group=Group::where("id",$id)->delete();

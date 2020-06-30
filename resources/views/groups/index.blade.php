@@ -5,6 +5,8 @@
 @endsection
 @section('page-class') groups @endsection
 @section('content')
+@include('includes.info-box')
+@include('includes.message-block')
     <div class="mc-box">
         <h2>Group list</h2>
         <ul>

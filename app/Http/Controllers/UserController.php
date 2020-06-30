@@ -85,8 +85,10 @@ class UserController extends Controller {
         $user->about_me = $request['about_me'];
         $user->update();
         $file = $request->file('image');
-        $filename = $user->id.'.jpg';
-        Storage::disk('local')->put($filename, File::get($file));
+        if($file) {
+            $filename = $user->id.'.jpg';
+            Storage::disk('local')->put($filename, File::get($file));
+        }
         return redirect()->route('account');
     }
     public function getUserImage(Request $request){

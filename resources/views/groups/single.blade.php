@@ -8,14 +8,18 @@
     <div class="mc-box">
         <div>
             <h2>{{$group->name}}</h2>
-            <a class="uk-button" href="{!! route('groups.delete', ['id' => $group->id]) !!}">delete group</a>
+            @if($isAdmin)
+                <a class="uk-button" href="{!! route('groups.delete', ['id' => $group->id]) !!}">delete group</a>
+            @endif
         </div>
-        
         <h3>Users</h3>
         <ul>
             @foreach($users as $user)
                 <li class="mc-label-white">
-                    {{ $user->first_name }} <a href="{!! route('groups.user.delete', ['group_id'=>$group->id,'user_id' => $user->id]) !!}">delete user</a>
+                    {{ $user->first_name }} 
+                    @if(Auth::user()->id == $user->id || $isAdmin)
+                        <a href="{!! route('groups.user.delete', ['group_id'=>$group->id,'user_id' => $user->id]) !!}">delete user</a>
+                    @endif
                 </li>
             @endforeach
         </ul>

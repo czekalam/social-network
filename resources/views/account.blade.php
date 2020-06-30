@@ -18,6 +18,11 @@
                         <label class="mc-label-white" for="about_me">About me</label>
                         <textarea class="uk-textarea uk-margin-bottom" name="about_me">About me</textarea>
                     </div>
+                    @if (Storage::disk('local')->has($user->id . '.jpg'))
+                        <div class="mc-account-img">
+                            <img src="{{ route('account.image', ['user_id' => $user->id]) }}">
+                        </div>
+                    @endif
                     <div class="">
                         <label class="mc-label-white" for="image">Image</label>
                         <input class="mc-account-file" type="file" name="image" class="" id="image">
