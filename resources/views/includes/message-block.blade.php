@@ -1,10 +1,8 @@
 @if ($errors->any())
 <div class="mc-infobox">
-    <ul>
         @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
+            <p class="mc-no-margin">{{ $error }}</p>
         @endforeach
-    </ul>
 </div>
 @endif
 @if (Session::has('message'))

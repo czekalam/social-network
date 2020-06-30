@@ -23,7 +23,7 @@ class GroupController extends Controller {
     }
     public function getDelete($id) {
         $group=Group::where("id",$id)->delete();
-        return redirect()->back();
+        return redirect()->route('groups');
     }
     public function postAddGroup(Request $request) {
         $this->validate($request, [

@@ -59,7 +59,8 @@ class UserController extends Controller {
         if(Auth::attempt(['email'=>$request['email'], 'password'=>$request['password']])) {
             return redirect()->route('dashboard');
         }
-        return redirect()->back();
+        $message = "Wrong data";
+        return redirect()->back()->with(['message' => $message]);
     }
     public function getLogout()    {
         Auth::logout();
